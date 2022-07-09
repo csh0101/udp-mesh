@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package proto;
+option go_package = "main";
+
+service GreetSevice {
+    rpc DoHostInfoRquest(HostInfoMessageRequest) returns (HostInfoMessageResponse){}
+    
+}
+
+message HostInfoMessageRequest {
+    Request req = 1;
+}
+message HostInfoMessageResponse {
+    HostInfo host = 1;
+}
+message HostInfo {
+    string address = 1;
+}
+message Request {
+    string uuid = 1;
+}
