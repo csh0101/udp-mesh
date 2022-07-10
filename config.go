@@ -1,17 +1,13 @@
 package main
 
 type Config struct {
-	RemoteAddr string
-	RemotePort int
-	LocalAddr  string
-	LocalPort  int
+	LocalAddr string
+	LocalPort int
 }
 
-var (
-	DefaultBroadCast = Config{
-		RemoteAddr: "255.255.255.255",
-		RemotePort: 18888,
-		LocalAddr:  "",
-		LocalPort:  -1,
+func NewConfig(laddr, raddr string, lport, rport int) Config {
+	return Config{
+		LocalAddr: laddr,
+		LocalPort: lport,
 	}
-)
+}

@@ -24,167 +24,119 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
-type HostInfoMessageRequest struct {
-	Req                  *Request `protobuf:"bytes,1,opt,name=req,proto3" json:"req,omitempty"`
+type HostInfoMessage struct {
+	Host                 string   `protobuf:"bytes,1,opt,name=host,proto3" json:"host,omitempty"`
+	Arp                  *ARP     `protobuf:"bytes,2,opt,name=arp,proto3" json:"arp,omitempty"`
+	Req                  bool     `protobuf:"varint,3,opt,name=req,proto3" json:"req,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *HostInfoMessageRequest) Reset()         { *m = HostInfoMessageRequest{} }
-func (m *HostInfoMessageRequest) String() string { return proto.CompactTextString(m) }
-func (*HostInfoMessageRequest) ProtoMessage()    {}
-func (*HostInfoMessageRequest) Descriptor() ([]byte, []int) {
+func (m *HostInfoMessage) Reset()         { *m = HostInfoMessage{} }
+func (m *HostInfoMessage) String() string { return proto.CompactTextString(m) }
+func (*HostInfoMessage) ProtoMessage()    {}
+func (*HostInfoMessage) Descriptor() ([]byte, []int) {
 	return fileDescriptor_85e40b83b4d50a8d, []int{0}
 }
 
-func (m *HostInfoMessageRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_HostInfoMessageRequest.Unmarshal(m, b)
+func (m *HostInfoMessage) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_HostInfoMessage.Unmarshal(m, b)
 }
-func (m *HostInfoMessageRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_HostInfoMessageRequest.Marshal(b, m, deterministic)
+func (m *HostInfoMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_HostInfoMessage.Marshal(b, m, deterministic)
 }
-func (m *HostInfoMessageRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_HostInfoMessageRequest.Merge(m, src)
+func (m *HostInfoMessage) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_HostInfoMessage.Merge(m, src)
 }
-func (m *HostInfoMessageRequest) XXX_Size() int {
-	return xxx_messageInfo_HostInfoMessageRequest.Size(m)
+func (m *HostInfoMessage) XXX_Size() int {
+	return xxx_messageInfo_HostInfoMessage.Size(m)
 }
-func (m *HostInfoMessageRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_HostInfoMessageRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_HostInfoMessageRequest proto.InternalMessageInfo
-
-func (m *HostInfoMessageRequest) GetReq() *Request {
-	if m != nil {
-		return m.Req
-	}
-	return nil
+func (m *HostInfoMessage) XXX_DiscardUnknown() {
+	xxx_messageInfo_HostInfoMessage.DiscardUnknown(m)
 }
 
-type HostInfoMessageResponse struct {
-	Host                 *HostInfo `protobuf:"bytes,1,opt,name=host,proto3" json:"host,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
-	XXX_unrecognized     []byte    `json:"-"`
-	XXX_sizecache        int32     `json:"-"`
-}
+var xxx_messageInfo_HostInfoMessage proto.InternalMessageInfo
 
-func (m *HostInfoMessageResponse) Reset()         { *m = HostInfoMessageResponse{} }
-func (m *HostInfoMessageResponse) String() string { return proto.CompactTextString(m) }
-func (*HostInfoMessageResponse) ProtoMessage()    {}
-func (*HostInfoMessageResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_85e40b83b4d50a8d, []int{1}
-}
-
-func (m *HostInfoMessageResponse) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_HostInfoMessageResponse.Unmarshal(m, b)
-}
-func (m *HostInfoMessageResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_HostInfoMessageResponse.Marshal(b, m, deterministic)
-}
-func (m *HostInfoMessageResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_HostInfoMessageResponse.Merge(m, src)
-}
-func (m *HostInfoMessageResponse) XXX_Size() int {
-	return xxx_messageInfo_HostInfoMessageResponse.Size(m)
-}
-func (m *HostInfoMessageResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_HostInfoMessageResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_HostInfoMessageResponse proto.InternalMessageInfo
-
-func (m *HostInfoMessageResponse) GetHost() *HostInfo {
+func (m *HostInfoMessage) GetHost() string {
 	if m != nil {
 		return m.Host
 	}
+	return ""
+}
+
+func (m *HostInfoMessage) GetArp() *ARP {
+	if m != nil {
+		return m.Arp
+	}
 	return nil
 }
 
-type HostInfo struct {
-	Address              string   `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
+func (m *HostInfoMessage) GetReq() bool {
+	if m != nil {
+		return m.Req
+	}
+	return false
+}
+
+type ARP struct {
+	Src                  string   `protobuf:"bytes,1,opt,name=src,proto3" json:"src,omitempty"`
+	Dst                  string   `protobuf:"bytes,2,opt,name=dst,proto3" json:"dst,omitempty"`
+	Forwardaddress       []string `protobuf:"bytes,3,rep,name=forwardaddress,proto3" json:"forwardaddress,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *HostInfo) Reset()         { *m = HostInfo{} }
-func (m *HostInfo) String() string { return proto.CompactTextString(m) }
-func (*HostInfo) ProtoMessage()    {}
-func (*HostInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor_85e40b83b4d50a8d, []int{2}
+func (m *ARP) Reset()         { *m = ARP{} }
+func (m *ARP) String() string { return proto.CompactTextString(m) }
+func (*ARP) ProtoMessage()    {}
+func (*ARP) Descriptor() ([]byte, []int) {
+	return fileDescriptor_85e40b83b4d50a8d, []int{1}
 }
 
-func (m *HostInfo) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_HostInfo.Unmarshal(m, b)
+func (m *ARP) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ARP.Unmarshal(m, b)
 }
-func (m *HostInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_HostInfo.Marshal(b, m, deterministic)
+func (m *ARP) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ARP.Marshal(b, m, deterministic)
 }
-func (m *HostInfo) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_HostInfo.Merge(m, src)
+func (m *ARP) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ARP.Merge(m, src)
 }
-func (m *HostInfo) XXX_Size() int {
-	return xxx_messageInfo_HostInfo.Size(m)
+func (m *ARP) XXX_Size() int {
+	return xxx_messageInfo_ARP.Size(m)
 }
-func (m *HostInfo) XXX_DiscardUnknown() {
-	xxx_messageInfo_HostInfo.DiscardUnknown(m)
+func (m *ARP) XXX_DiscardUnknown() {
+	xxx_messageInfo_ARP.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_HostInfo proto.InternalMessageInfo
+var xxx_messageInfo_ARP proto.InternalMessageInfo
 
-func (m *HostInfo) GetAddress() string {
+func (m *ARP) GetSrc() string {
 	if m != nil {
-		return m.Address
+		return m.Src
 	}
 	return ""
 }
 
-type Request struct {
-	Uuid                 string   `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *Request) Reset()         { *m = Request{} }
-func (m *Request) String() string { return proto.CompactTextString(m) }
-func (*Request) ProtoMessage()    {}
-func (*Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor_85e40b83b4d50a8d, []int{3}
-}
-
-func (m *Request) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Request.Unmarshal(m, b)
-}
-func (m *Request) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_Request.Marshal(b, m, deterministic)
-}
-func (m *Request) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Request.Merge(m, src)
-}
-func (m *Request) XXX_Size() int {
-	return xxx_messageInfo_Request.Size(m)
-}
-func (m *Request) XXX_DiscardUnknown() {
-	xxx_messageInfo_Request.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_Request proto.InternalMessageInfo
-
-func (m *Request) GetUuid() string {
+func (m *ARP) GetDst() string {
 	if m != nil {
-		return m.Uuid
+		return m.Dst
 	}
 	return ""
+}
+
+func (m *ARP) GetForwardaddress() []string {
+	if m != nil {
+		return m.Forwardaddress
+	}
+	return nil
 }
 
 func init() {
-	proto.RegisterType((*HostInfoMessageRequest)(nil), "proto.HostInfoMessageRequest")
-	proto.RegisterType((*HostInfoMessageResponse)(nil), "proto.HostInfoMessageResponse")
-	proto.RegisterType((*HostInfo)(nil), "proto.HostInfo")
-	proto.RegisterType((*Request)(nil), "proto.Request")
+	proto.RegisterType((*HostInfoMessage)(nil), "proto.HostInfoMessage")
+	proto.RegisterType((*ARP)(nil), "proto.ARP")
 }
 
 func init() {
@@ -192,20 +144,21 @@ func init() {
 }
 
 var fileDescriptor_85e40b83b4d50a8d = []byte{
-	// 208 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0xca, 0xc8, 0x2f, 0x2e,
-	0xd1, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x05, 0x53, 0x4a, 0x56, 0x5c, 0x62, 0x1e, 0xf9,
-	0xc5, 0x25, 0x9e, 0x79, 0x69, 0xf9, 0xbe, 0xa9, 0xc5, 0xc5, 0x89, 0xe9, 0xa9, 0x41, 0xa9, 0x85,
-	0xa5, 0xa9, 0xc5, 0x25, 0x42, 0x0a, 0x5c, 0xcc, 0x45, 0xa9, 0x85, 0x12, 0x8c, 0x0a, 0x8c, 0x1a,
-	0xdc, 0x46, 0x7c, 0x10, 0x5d, 0x7a, 0x50, 0xc9, 0x20, 0x90, 0x94, 0x92, 0x1d, 0x97, 0x38, 0x86,
-	0xde, 0xe2, 0x82, 0xfc, 0xbc, 0xe2, 0x54, 0x21, 0x65, 0x2e, 0x16, 0x90, 0x5d, 0x50, 0xdd, 0xfc,
-	0x50, 0xdd, 0x30, 0xd5, 0x41, 0x60, 0x49, 0x25, 0x15, 0x2e, 0x0e, 0x98, 0x88, 0x90, 0x04, 0x17,
-	0x7b, 0x62, 0x4a, 0x4a, 0x51, 0x6a, 0x71, 0x31, 0x58, 0x0f, 0x67, 0x10, 0x8c, 0xab, 0x24, 0xcb,
-	0xc5, 0x0e, 0x73, 0x92, 0x10, 0x17, 0x4b, 0x69, 0x69, 0x66, 0x0a, 0x54, 0x05, 0x98, 0x6d, 0x94,
-	0xc4, 0xc5, 0xed, 0x5e, 0x94, 0x9a, 0x5a, 0x12, 0x9c, 0x5a, 0x96, 0x99, 0x9c, 0x2a, 0x14, 0xcc,
-	0x25, 0xe0, 0x92, 0x0f, 0xb7, 0x07, 0xa2, 0x4d, 0x16, 0xcd, 0x7a, 0x54, 0x8f, 0x4a, 0xc9, 0xe1,
-	0x92, 0x86, 0xf8, 0x45, 0x89, 0xc1, 0x89, 0x2d, 0x8a, 0x25, 0x37, 0x31, 0x33, 0x2f, 0x89, 0x0d,
-	0xac, 0xd0, 0x18, 0x10, 0x00, 0x00, 0xff, 0xff, 0xe3, 0x97, 0xd6, 0x31, 0x48, 0x01, 0x00, 0x00,
+	// 218 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x74, 0x8f, 0xb1, 0x4b, 0x43, 0x31,
+	0x10, 0xc6, 0x7d, 0xa6, 0x16, 0xdf, 0x15, 0xb4, 0xdc, 0x20, 0x41, 0x1c, 0xc2, 0x1b, 0x24, 0x53,
+	0x87, 0xfa, 0x17, 0x54, 0x0a, 0xea, 0x20, 0xd4, 0x2b, 0x2e, 0x6e, 0xb1, 0xb9, 0x6a, 0x07, 0x9b,
+	0xf6, 0x2e, 0xea, 0xbf, 0x2f, 0x89, 0x75, 0x79, 0xe0, 0x94, 0x1f, 0xbf, 0x7c, 0x7c, 0x7c, 0x07,
+	0xf0, 0x9e, 0x34, 0x4f, 0x76, 0x92, 0x72, 0xc2, 0x93, 0xfa, 0x74, 0xcf, 0x70, 0x7e, 0x9f, 0x34,
+	0x3f, 0x6c, 0xd7, 0xe9, 0x91, 0x55, 0xc3, 0x1b, 0x23, 0xc2, 0xa0, 0xe4, 0x6c, 0xe3, 0x1a, 0xdf,
+	0x52, 0x65, 0xbc, 0x02, 0x13, 0x64, 0x67, 0x8f, 0x5d, 0xe3, 0x47, 0x53, 0xf8, 0xad, 0x98, 0xcc,
+	0x68, 0x41, 0x45, 0xe3, 0x18, 0x8c, 0xf0, 0xde, 0x1a, 0xd7, 0xf8, 0x53, 0x2a, 0xd8, 0x3d, 0x81,
+	0x99, 0xd1, 0xa2, 0x7c, 0xa8, 0xac, 0x0e, 0x4d, 0x05, 0x8b, 0x89, 0x9a, 0x6b, 0x51, 0x4b, 0x05,
+	0xf1, 0x1a, 0xce, 0xd6, 0x49, 0xbe, 0x83, 0xc4, 0x10, 0xa3, 0xb0, 0xaa, 0x35, 0xce, 0xf8, 0x96,
+	0x7a, 0x76, 0xba, 0x84, 0xd1, 0x9d, 0x30, 0xe7, 0x25, 0x7f, 0x6d, 0x56, 0x8c, 0x73, 0x18, 0xcf,
+	0xd3, 0xdf, 0x74, 0xda, 0x7f, 0xb2, 0x66, 0xbc, 0x38, 0x0c, 0xeb, 0x5d, 0x74, 0xf9, 0x8f, 0xef,
+	0x8e, 0x6e, 0x87, 0x2f, 0x83, 0x8f, 0xb0, 0xd9, 0xbe, 0x0e, 0x6b, 0xe0, 0xe6, 0x27, 0x00, 0x00,
+	0xff, 0xff, 0x6d, 0x78, 0x76, 0x3c, 0x22, 0x01, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -220,7 +173,7 @@ const _ = grpc.SupportPackageIsVersion6
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type GreetSeviceClient interface {
-	DoHostInfoRquest(ctx context.Context, in *HostInfoMessageRequest, opts ...grpc.CallOption) (*HostInfoMessageResponse, error)
+	DoHostInfoRquest(ctx context.Context, in *HostInfoMessage, opts ...grpc.CallOption) (*HostInfoMessage, error)
 }
 
 type greetSeviceClient struct {
@@ -231,8 +184,8 @@ func NewGreetSeviceClient(cc grpc.ClientConnInterface) GreetSeviceClient {
 	return &greetSeviceClient{cc}
 }
 
-func (c *greetSeviceClient) DoHostInfoRquest(ctx context.Context, in *HostInfoMessageRequest, opts ...grpc.CallOption) (*HostInfoMessageResponse, error) {
-	out := new(HostInfoMessageResponse)
+func (c *greetSeviceClient) DoHostInfoRquest(ctx context.Context, in *HostInfoMessage, opts ...grpc.CallOption) (*HostInfoMessage, error) {
+	out := new(HostInfoMessage)
 	err := c.cc.Invoke(ctx, "/proto.GreetSevice/DoHostInfoRquest", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -242,14 +195,14 @@ func (c *greetSeviceClient) DoHostInfoRquest(ctx context.Context, in *HostInfoMe
 
 // GreetSeviceServer is the server API for GreetSevice service.
 type GreetSeviceServer interface {
-	DoHostInfoRquest(context.Context, *HostInfoMessageRequest) (*HostInfoMessageResponse, error)
+	DoHostInfoRquest(context.Context, *HostInfoMessage) (*HostInfoMessage, error)
 }
 
 // UnimplementedGreetSeviceServer can be embedded to have forward compatible implementations.
 type UnimplementedGreetSeviceServer struct {
 }
 
-func (*UnimplementedGreetSeviceServer) DoHostInfoRquest(ctx context.Context, req *HostInfoMessageRequest) (*HostInfoMessageResponse, error) {
+func (*UnimplementedGreetSeviceServer) DoHostInfoRquest(ctx context.Context, req *HostInfoMessage) (*HostInfoMessage, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DoHostInfoRquest not implemented")
 }
 
@@ -258,7 +211,7 @@ func RegisterGreetSeviceServer(s *grpc.Server, srv GreetSeviceServer) {
 }
 
 func _GreetSevice_DoHostInfoRquest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HostInfoMessageRequest)
+	in := new(HostInfoMessage)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -270,7 +223,7 @@ func _GreetSevice_DoHostInfoRquest_Handler(srv interface{}, ctx context.Context,
 		FullMethod: "/proto.GreetSevice/DoHostInfoRquest",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GreetSeviceServer).DoHostInfoRquest(ctx, req.(*HostInfoMessageRequest))
+		return srv.(GreetSeviceServer).DoHostInfoRquest(ctx, req.(*HostInfoMessage))
 	}
 	return interceptor(ctx, in, info, handler)
 }

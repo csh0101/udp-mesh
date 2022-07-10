@@ -4,34 +4,45 @@ import (
 	"sync"
 )
 
+// Message DESIGNG  version + reuqestid + content
+// version 1byte
+// requestid 32zijie
+// content protobuf
+// req/resp handler+type  is_need_forward request+id
+
 // unused
-type HostInfoDispatcher struct {
+type Dispatcher struct {
 	rwLock            *sync.RWMutex
-	requestDispatcher map[string]chan HostInfoMessageResponse
+	requestDispatcher map[string]chan ReadUnit
 }
 
-func (m *HostInfoDispatcher) Dispatch(response HostInfoMessageResponse, uuid string) {
+func NewDispatcher() *Dispatcher {
+	return &Dispatcher{
+		rwLock:            &sync.RWMutex{},
+		requestDispatcher: make(map[string]chan ReadUnit),
+	}
+}
+
+// message only have requestID and message
+func (m *Dispatcher) Dispatch(message ReadUnit, uuid string) {
 	m.rwLock.RLock()
-	m.requestDispatcher[uuid] <- response
+	if ch, ok := m.requestDispatcher[uuid]; ok {
+		ch <- message
+	}
 	m.rwLock.RUnlock()
 }
 
-func (m *HostInfoDispatcher) Add(uuid string) {
+func (m *Dispatcher) Add(uuid string) <-chan ReadUnit {
 	m.rwLock.Lock()
-	ch := make(chan HostInfoMessageResponse)
+	ch := make(chan ReadUnit)
 	m.requestDispatcher[uuid] = ch
 	m.rwLock.Unlock()
+	return ch
 }
 
-func (m *HostInfoDispatcher) CloseChannel(uuid string) {
+func (m *Dispatcher) CloseChannel(uuid string) {
 	m.rwLock.Lock()
 	close(m.requestDispatcher[uuid])
 	delete(m.requestDispatcher, uuid)
 	m.rwLock.Unlock()
-}
-
-// Filter filet the smae tuple (source + reuqestID)
-type Filter struct {
-	rwLock     *sync.RWMutex
-	requestMap map[string]struct{}
 }

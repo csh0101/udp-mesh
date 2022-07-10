@@ -4,19 +4,15 @@ package proto;
 option go_package = "main";
 
 service GreetSevice {
-    rpc DoHostInfoRquest(HostInfoMessageRequest) returns (HostInfoMessageResponse){}
-    
+    rpc DoHostInfoRquest(HostInfoMessage) returns (HostInfoMessage){}    
 }
-
-message HostInfoMessageRequest {
-    Request req = 1;
+message HostInfoMessage {
+    string host = 1; 
+    ARP arp = 2;     
+    bool req =3;
 }
-message HostInfoMessageResponse {
-    HostInfo host = 1;
-}
-message HostInfo {
-    string address = 1;
-}
-message Request {
-    string uuid = 1;
+message ARP{
+    string src = 1;
+    string dst = 2;
+    repeated string forwardaddress =3;
 }

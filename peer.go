@@ -45,7 +45,6 @@ func WriteLoop(ctx context.Context, in <-chan WriteUnit) {
 
 type ReadUnit struct {
 	message []byte
-	addr    net.Addr
 }
 
 func ReadLoop(ctx context.Context) <-chan ReadUnit {
@@ -63,13 +62,12 @@ func ReadLoop(ctx context.Context) <-chan ReadUnit {
 			default:
 			}
 			buf := make([]byte, 1024)
-			n, addr, err := listener.ReadFrom(buf)
+			n, _, err := listener.ReadFrom(buf)
 			if err != nil {
 				panic(err)
 			}
 			out <- ReadUnit{
 				message: buf[:n],
-				addr:    addr,
 			}
 		}
 		close(out)
